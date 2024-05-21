@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StateManagementClass(
       child: MaterialApp(
-        title: 'Flutter D',
+        title: 'Touch Inspiration Assessment',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -25,4 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-64118a3101d69493922202ca

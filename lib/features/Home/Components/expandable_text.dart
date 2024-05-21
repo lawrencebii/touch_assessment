@@ -48,12 +48,12 @@ class _ExpandableTextState extends State<ExpandableText> {
           }
         });
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return Text(
+        return Consumer<HomeProvider>(
+          builder: (context, provider, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   widget.text,
                   maxLines: widget.id == provider.maxedID.toString() ? null : 1,
                   overflow: widget.id == provider.maxedID.toString()
@@ -63,36 +63,38 @@ class _ExpandableTextState extends State<ExpandableText> {
                     color: Theme.of(context).hintColor.withOpacity(0.5),
                     fontSize: 11,
                   ),
-                );
-              },
-            ),
-            if (_isOverflowing)
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _isExpanded = !_isExpanded;
-                  });
-
-                  context.read<HomeProvider>().setMaxedId(widget.id);
-                },
-                child: Container(
-                  padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    )),
-                  ),
-                  child: Text(
-                    _isExpanded ? "view less" : "view more",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 11,
-                        height: 0),
-                  ),
                 ),
-              ),
-          ],
+                if (_isOverflowing)
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isExpanded = !_isExpanded;
+                      });
+
+                      context.read<HomeProvider>().setMaxedId(widget.id);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                        )),
+                      ),
+                      child: Text(
+                        widget.id == provider.maxedID.toString()
+                            ? "view less"
+                            : "view more",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 11,
+                            height: 0),
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          },
         );
       },
     );

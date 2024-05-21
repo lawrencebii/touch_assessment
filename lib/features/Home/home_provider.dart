@@ -56,8 +56,8 @@ class HomeProvider extends ChangeNotifier {
   String _maxedId = "";
   get maxedID => _maxedId;
   void setMaxedId(id) {
-    log("Max Id set");
     if (_maxedId != id) {
+      log("Max Id set");
       _maxedId = id;
     } else {
       _maxedId = '';
