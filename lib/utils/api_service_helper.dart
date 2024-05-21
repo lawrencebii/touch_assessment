@@ -14,7 +14,6 @@ class GenericService {
         Uri.parse(endpoint),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          // 'Authorization': 'Bearer ${loginResponseModel.access_token}'
         },
       );
       if (response.statusCode == 401) {
@@ -36,15 +35,18 @@ class GenericService {
   Future<dynamic> patchRequestApi({
     required String endpoint,
     required BuildContext context,
+    required body,
   }) async {
     try {
-      Response response = await get(
+      Response response = await patch(
         Uri.parse(endpoint),
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          // 'Authorization': 'Bearer ${loginResponseModel.access_token}'
+          'Content-Type': 'application/json',
         },
+        body: json.encoder.convert(body),
       );
+      print(endpoint);
+      print(response.headers.toString());
       if (response.statusCode == 401) {
         // endoint is unauthorized so I can tap the user journey here and
         // redirect to login or refresh access and call the same function
